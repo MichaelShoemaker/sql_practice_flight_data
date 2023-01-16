@@ -1,0 +1,29 @@
+
+services:
+  pgdatabase:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=flights
+    volumes:
+      - flight_data:/var/lib/postgresql/data:rw
+      - ./data:/home:rw
+    ports:
+      - "5432:5432"
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    ports:
+      - "8080:80"
+volumes:
+  flight_data:
+  pgadmin-data:
+
+    

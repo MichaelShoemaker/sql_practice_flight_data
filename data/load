@@ -1,0 +1,6 @@
+#!/bin/bash
+psql flights -a -f load_data > /dev/null
+psql flights -c 'call load_data();' > /dev/null
+
+echo "Tables have been created and populated"
+echo "Don't just have a good day, have a GREAT day :-)"

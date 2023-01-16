@@ -1,0 +1,63 @@
+-- PROCEDURE: public.load_data()
+
+-- DROP PROCEDURE IF EXISTS public.load_data();
+
+CREATE OR REPLACE PROCEDURE public.load_data(
+	)
+LANGUAGE 'sql'
+AS $BODY$
+drop table if exists flights;
+drop table if exists airports;
+drop table if exists airlines;
+
+CREATE TABLE airlines (IATA_CODE varchar(3),AIRLINE varchar(75));
+
+CREATE TABLE airports (IATA_CODE varchar(3),
+AIRPORT varchar(100),
+CITY varchar(45),
+"STATE" varchar(5),
+COUNTRY varchar(5),
+LATITUDE float,
+LONGITUDE float);
+
+CREATE TABLE flights(
+"YEAR"                 int,
+"MONTH"                int,
+"DAY"                  int,
+"DAY_OF_WEEK"          int,
+"AIRLINE"             varchar(75),
+"FLIGHT_NUMBER"        int,
+"TAIL_NUMBER"         varchar(40),
+"ORIGIN_AIRPORT"      varchar(75),
+"DESTINATION_AIRPORT" varchar(75),
+"SCHEDULED_DEPARTURE"  int,
+"DEPARTURE_TIME"     float,
+"DEPARTURE_DELAY"    float,
+"TAXI_OUT"           float,
+"WHEELS_OFF"         float,
+"SCHEDULED_TIME"     float,
+"ELAPSED_TIME"       float,
+"AIR_TIME"           float,
+"DISTANCE"             int,
+"WHEELS_ON"          float,
+"TAXI_IN"            float,
+"SCHEDULED_ARRIVAL"    int,
+"ARRIVAL_TIME"       float,
+"ARRIVAL_DELAY"      float,
+"DIVERTED"             int,
+"CANCELLED"            int,
+"CANCELLATION_REASON" varchar(75),
+"AIR_SYSTEM_DELAY"   float,
+"SECURITY_DELAY"     float,
+"AIRLINE_DELAY"      float,
+"LATE_AIRCRAFT_DELAY"float,
+"WEATHER_DELAY"      float);
+
+copy flights FROM '/data/flights.csv' DELIMITER ',' CSV HEADER;
+copy airlines FROM '/data/airlines.csv' DELIMITER ',' CSV HEADER;
+copy airports FROM '/data/airports.csv' DELIMITER ',' CSV HEADER;
+
+$BODY$;
+
+ALTER PROCEDURE public.load_data()
+    OWNER TO root;
