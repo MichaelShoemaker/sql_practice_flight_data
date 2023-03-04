@@ -1,6 +1,7 @@
 
 services:
   pgdatabase:
+    container_name: database
     build:
       context: .
       dockerfile: Dockerfile
@@ -13,6 +14,7 @@ services:
     ports:
       - "5432:5432"
   pgadmin:
+    container_name: pg_admin
     image: dpage/pgadmin4
     environment:
       - PGADMIN_DEFAULT_EMAIL=admin@admin.com
@@ -21,8 +23,13 @@ services:
       - pgadmin-data:/var/lib/pgadmin
     ports:
       - "8080:80"
+    depends_on:
+      - pgdatabase
+      
 volumes:
   flight_data:
+    name: flight_data
   pgadmin-data:
+    name: pgadmin-data
 
     

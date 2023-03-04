@@ -1,7 +1,3 @@
--- PROCEDURE: public.load_data()
-
--- DROP PROCEDURE IF EXISTS public.load_data();
-
 CREATE OR REPLACE PROCEDURE public.load_data(
 	)
 LANGUAGE 'sql'
