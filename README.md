@@ -24,4 +24,4 @@ docker-compose</br>
 
 
 ### Walkthrough Video:<br />
-https://www.youtube.com/watch?v=ww1Sy2uh_2o
+https://www.youtube.com/watch?v=dThedBOnozQ
